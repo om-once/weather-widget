@@ -25,42 +25,46 @@ btnCity.addEventListener("click", function () {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      windSpeed.textContent = +data.wind.speed.toFixed(2);
-      humidityPer.textContent = data.main.humidity + " %";
-      weatherDesc.textContent = data.weather[0].description;
-      preasureValue.textContent = data.main.pressure;
-      windDeg.textContent = data.wind.deg;
-      tempValue.textContent = Math.floor(+data.main.temp);
-      icon = data.weather[0].icon;
-      iconUrl = `http://openweathermap.org/img/w/${icon}.png`;
-      weatherIcon = document.createElement("img");
-      weatherIcon.setAttribute("src", iconUrl);
-      iconWeatherWrapper.append(weatherIcon);
-      switch (date.getDay()) {
-        case 0:
-          dayName.textContent = "Sunday";
-          break;
-        case 1:
-          dayName.textContent = "Monday";
-          break;
-        case 2:
-          dayName.textContent = "Tuesday";
-          break;
-        case 3:
-          dayName.textContent = "Wednesday";
-          break;
-        case 4:
-          dayName.textContent = "Thursday";
-          break;
-        case 5:
-          dayName.textContent = "Friday";
-          break;
-        case 6:
-          dayName.textContent = "Saturday";
-          break;
+      if (data.cod != 200) {
+        alert(data.message);
+      } else {
+        windSpeed.textContent = +data.wind.speed.toFixed(2);
+        humidityPer.textContent = data.main.humidity + " %";
+        weatherDesc.textContent = data.weather[0].description;
+        preasureValue.textContent = data.main.pressure;
+        windDeg.textContent = data.wind.deg;
+        tempValue.textContent = Math.floor(+data.main.temp);
+        icon = data.weather[0].icon;
+        iconUrl = `http://openweathermap.org/img/w/${icon}.png`;
+        weatherIcon = document.createElement("img");
+        weatherIcon.setAttribute("src", iconUrl);
+        iconWeatherWrapper.append(weatherIcon);
+        switch (date.getDay()) {
+          case 0:
+            dayName.textContent = "Sunday";
+            break;
+          case 1:
+            dayName.textContent = "Monday";
+            break;
+          case 2:
+            dayName.textContent = "Tuesday";
+            break;
+          case 3:
+            dayName.textContent = "Wednesday";
+            break;
+          case 4:
+            dayName.textContent = "Thursday";
+            break;
+          case 5:
+            dayName.textContent = "Friday";
+            break;
+          case 6:
+            dayName.textContent = "Saturday";
+            break;
+        }
+        todayDate.textContent = `${date.getDate()}/${
+          date.getMonth() + 1
+        }/${date.getFullYear()}`;
       }
-      todayDate.textContent = `${date.getDate()}/${
-        date.getMonth() + 1
-      }/${date.getFullYear()}`;
     });
 });
