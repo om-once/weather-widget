@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="weather-widget">
+      <div class="weather-widget__top">
+        <input
+          class="weather-widget__input"
+          type="text"
+          placeholder="Type your city..."
+        />
+        <button class="weather-widget__btn" type="button">Submit</button>
+      </div>
+      <div class="weather-widget__wrapper">
+        <div class="weather-widget__left">
+          <p class="weather-widget__city">City Name</p>
+          <p class="weather-widget__day">Day</p>
+          <p class="weather-widget__date">00/00/2023</p>
+          <p class="weather-widget__wind">
+            Wind: <span id="wind">?</span> km/h
+          </p>
+          <p class="weather-widget__humidity">
+            <svg
+              class="icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M20 14.5714C20 18.7526 16.3364 22 12 22C7.66359 22 4 18.7526 4 14.5714C4 12 5.30472 9.45232 6.71637 7.42349C8.1468 5.36767 9.79177 3.69743 10.6777 2.85537M20 14.5714L10.6777 2.85537M20 14.5714C20 12 18.6953 9.45232 17.2836 7.42349C15.8532 5.36767 14.2082 3.69743 13.3223 2.85537C12.5778 2.14778 11.4222 2.14778 10.6777 2.85537M20 14.5714L10.6777 2.85537"
+                stroke="#33363F"
+                stroke-width="2"
+              />
+              <path
+                d="M12 18C11.4747 18 10.9546 17.8965 10.4693 17.6955C9.98396 17.4945 9.54301 17.1999 9.17157 16.8284C8.80014 16.457 8.5055 16.016 8.30448 15.5307C8.10346 15.0454 8 14.5253 8 14"
+                stroke="#33363F"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+            <span id="humidity">?</span>
+          </p>
+          <p class="weather-widget__pressure">
+            <svg
+              class="icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 9C11.4477 9 11 9.44771 11 10V15.2676C10.4022 15.6134 10 16.2597 10 17C10 18.1046 10.8954 19 12 19C13.1046 19 14 18.1046 14 17C14 16.2597 13.5978 15.6134 13 15.2676V10C13 9.44771 12.5523 9 12 9Z"
+                fill="#fff"
+              />
+              <path
+                d="M11 6C11 5.44772 11.4477 5 12 5C12.5523 5 13 5.44772 13 6C13 6.55228 12.5523 7 12 7C11.4477 7 11 6.55228 11 6Z"
+                fill="#fff"
+              />
+              <path
+                d="M16 7C15.4477 7 15 7.44772 15 8C15 8.55229 15.4477 9 16 9C16.5523 9 17 8.55229 17 8C17 7.44772 16.5523 7 16 7Z"
+                fill="#fff"
+              />
+              <path
+                d="M6 13C5.44772 13 5 12.5523 5 12C5 11.4477 5.44772 11 6 11C6.55228 11 7 11.4477 7 12C7 12.5523 6.55228 13 6 13Z"
+                fill="#fff"
+              />
+              <path
+                d="M7 8C7 8.55229 7.44772 9 8 9C8.55228 9 9 8.55228 9 8C9 7.44772 8.55228 7 8 7C7.44772 7 7 7.44772 7 8Z"
+                fill="#fff"
+              />
+              <path
+                d="M18 13C17.4477 13 17 12.5523 17 12C17 11.4477 17.4477 11 18 11C18.5523 11 19 11.4477 19 12C19 12.5523 18.5523 13 18 13Z"
+                fill="#fff"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23ZM12 20.9932C7.03321 20.9932 3.00683 16.9668 3.00683 12C3.00683 7.03321 7.03321 3.00683 12 3.00683C16.9668 3.00683 20.9932 7.03321 20.9932 12C20.9932 16.9668 16.9668 20.9932 12 20.9932Z"
+                fill="#fff"
+              />
+            </svg>
+            <span id="pressure">?</span>
+          </p>
+        </div>
+        <div class="weather-widget__middle">
+          <div class="weather-widget__icon"></div>
+          <div class="weather-widget__desc">Weather description</div>
+        </div>
+        <div class="weather-widget__right">
+          <div class="weather-widget__deg">
+            <svg
+              class="icon"
+              viewBox="0 0 30 30"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
+            >
+              <title>wind-flag</title>
+              <desc>Created with Sketch Beta.</desc>
+              <defs></defs>
+              <g
+                id="Page-1"
+                stroke="none"
+                stroke-width="1"
+                fill="none"
+                fill-rule="evenodd"
+                sketch:type="MSPage"
+              >
+                <g
+                  id="Icon-Set"
+                  sketch:type="MSLayerGroup"
+                  transform="translate(-465.000000, -776.000000)"
+                  fill="#fff"
+                >
+                  <path
+                    d="M493,786.066 C493,786.877 492.935,787 492,787 L489,787.3 L489,779.7 L492,780 C492.935,780 493,780.123 493,780.934 L493,786.066 L493,786.066 Z M487,787.5 L481,788.1 L481,778.9 L487,779.5 L487,787.5 L487,787.5 Z M479,788.3 L472,789 C471.065,789 471,788.811 471,788 L471,779 C471,778.19 471.065,778 472,778 L479,778.7 L479,788.3 L479,788.3 Z M493,778 L471,776 C469.896,776 469,776.896 469,778 L469,789 C469,790.104 469.896,791 471,791 L493,789 C494.104,789 495,788.104 495,787 L495,780 C495,778.896 494.104,778 493,778 L493,778 Z M466,776 C465.447,776 465,776.448 465,777 L465,805 C465,805.553 465.447,806 466,806 C466.553,806 467,805.553 467,805 L467,777 C467,776.448 466.553,776 466,776 L466,776 Z"
+                    id="wind-flag"
+                    sketch:type="MSShapeGroup"
+                  ></path>
+                </g>
+              </g>
+            </svg>
+            <span id="deg">?</span> &deg;
+          </div>
+          <div class="weather-widget__temp"><span id="temp">?</span> &deg;</div>
+        </div>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
