@@ -20,7 +20,7 @@ btnCity.addEventListener("click", function () {
   cityValue = inputCity.value.toUpperCase();
   cityName.textContent = cityValue;
   console.log(cityValue);
-  let url = `http://api.openweathermap.org/data/2.5/weather?q=${cityValue}&units=metric&APPID=5d066958a60d315387d9492393935c19`;
+  let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityValue}&units=metric&APPID=5d066958a60d315387d9492393935c19`;
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
