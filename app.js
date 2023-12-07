@@ -17,7 +17,6 @@ let icon;
 let iconUrl;
 let cityValue;
 let timezoneOffsetInSeconds;
-let newTimezoneOffset;
 btnCity.addEventListener("click", function () {
   currentTimeCity.textContent = "";
   iconWeatherWrapper.innerHTML = "";
@@ -39,11 +38,38 @@ btnCity.addEventListener("click", function () {
           const adjustedDate = new Date(
             currentDate.getTime() + timezoneOffsetInSeconds * 1000
           );
-          const hours = adjustedDate.getHours();
+          const year = adjustedDate.getFullYear();
+          const month = adjustedDate.getMonth() + 1;
+          const day = adjustedDate.getDay();
+          const hours = adjustedDate.getHours() - 2;
           const minutes = adjustedDate.getMinutes();
           const seconds = adjustedDate.getSeconds();
           const currentTime = `${hours}:${minutes}:${seconds}`;
           currentTimeCity.textContent = currentTime;
+          switch (day) {
+            case 0:
+              dayName.textContent = "Sunday";
+              break;
+            case 1:
+              dayName.textContent = "Monday";
+              break;
+            case 2:
+              dayName.textContent = "Tuesday";
+              break;
+            case 3:
+              dayName.textContent = "Wednesday";
+              break;
+            case 4:
+              dayName.textContent = "Thursday";
+              break;
+            case 5:
+              dayName.textContent = "Friday";
+              break;
+            case 6:
+              dayName.textContent = "Saturday";
+              break;
+          }
+          todayDate.textContent = `${day}/${month}/${year}`;
         }
         intervalId = setInterval(updateClock, 1000);
         if (timezoneOffsetInSeconds != +data.timezone) {
@@ -64,32 +90,6 @@ btnCity.addEventListener("click", function () {
         weatherIcon = document.createElement("img");
         weatherIcon.setAttribute("src", iconUrl);
         iconWeatherWrapper.append(weatherIcon);
-        switch (date.getDay()) {
-          case 0:
-            dayName.textContent = "Sunday";
-            break;
-          case 1:
-            dayName.textContent = "Monday";
-            break;
-          case 2:
-            dayName.textContent = "Tuesday";
-            break;
-          case 3:
-            dayName.textContent = "Wednesday";
-            break;
-          case 4:
-            dayName.textContent = "Thursday";
-            break;
-          case 5:
-            dayName.textContent = "Friday";
-            break;
-          case 6:
-            dayName.textContent = "Saturday";
-            break;
-        }
-        todayDate.textContent = `${date.getDate()}/${
-          date.getMonth() + 1
-        }/${date.getFullYear()}`;
       }
     });
 });
