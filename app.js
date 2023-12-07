@@ -11,11 +11,15 @@ const tempValue = document.querySelector("#temp");
 const dayName = document.querySelector(".weather-widget__day");
 const todayDate = document.querySelector(".weather-widget__date");
 const windDegDirrect = document.querySelector(".icon-wind");
+const currentTimeCity = document.querySelector(".weather-widget__time");
 let date = new Date();
 let icon;
 let iconUrl;
 let cityValue;
+let timezoneOffsetInSeconds;
+let newTimezoneOffset;
 btnCity.addEventListener("click", function () {
+  currentTimeCity.textContent = "";
   iconWeatherWrapper.innerHTML = "";
   let weatherIcon;
   cityValue = inputCity.value.toUpperCase();
@@ -29,6 +33,25 @@ btnCity.addEventListener("click", function () {
       if (data.cod != 200) {
         alert(data.message);
       } else {
+        timezoneOffsetInSeconds = +data.timezone;
+        function updateClock() {
+          const currentDate = new Date();
+          const adjustedDate = new Date(
+            currentDate.getTime() + timezoneOffsetInSeconds * 1000
+          );
+          const hours = adjustedDate.getHours();
+          const minutes = adjustedDate.getMinutes();
+          const seconds = adjustedDate.getSeconds();
+          const currentTime = `${hours}:${minutes}:${seconds}`;
+          currentTimeCity.textContent = currentTime;
+        }
+        intervalId = setInterval(updateClock, 1000);
+        if (timezoneOffsetInSeconds != +data.timezone) {
+          clearInterval(intervalId);
+          currentTimeCity.textContent = "";
+        } else {
+          intervalId = setInterval(updateClock, 1000);
+        }
         windSpeed.textContent = +data.wind.speed.toFixed(2);
         humidityPer.textContent = data.main.humidity + " %";
         weatherDesc.textContent = data.weather[0].description;

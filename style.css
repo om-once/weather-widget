@@ -126,6 +126,11 @@ body {
 .weather-widget__desc {
   text-transform: uppercase;
   font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.weather-widget__time {
+  font-size: 30px;
 }
 
 @media (max-width: 780px) {
@@ -166,5 +171,8 @@ body {
   .weather-widget__pressure,
   .weather-widget__humidity {
     margin-left: 0;
+  }
+  .weather-widget__time {
+    font-size: 18px;
   }
 }
