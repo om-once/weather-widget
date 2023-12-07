@@ -10,6 +10,7 @@ const windDeg = document.querySelector("#deg");
 const tempValue = document.querySelector("#temp");
 const dayName = document.querySelector(".weather-widget__day");
 const todayDate = document.querySelector(".weather-widget__date");
+const windDegDirrect = document.querySelector(".icon-wind");
 let date = new Date();
 let icon;
 let iconUrl;
@@ -33,6 +34,7 @@ btnCity.addEventListener("click", function () {
         weatherDesc.textContent = data.weather[0].description;
         preasureValue.textContent = data.main.pressure;
         windDeg.textContent = data.wind.deg;
+        windDegDirrect.style.transform = `rotate(${data.wind.deg}deg)`;
         tempValue.textContent = Math.floor(+data.main.temp);
         icon = data.weather[0].icon;
         iconUrl = `http://openweathermap.org/img/w/${icon}.png`;
