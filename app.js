@@ -41,7 +41,7 @@ btnCity.addEventListener("click", function () {
           const year = adjustedDate.getFullYear();
           const month = adjustedDate.getMonth() + 1;
           const day = adjustedDate.getDay();
-          const hours = adjustedDate.getHours() - 1;
+          const hours = adjustedDate.getHours() - 3;
           const minutes = adjustedDate.getMinutes();
           const seconds = adjustedDate.getSeconds();
           const currentTime = `${hours}:${minutes}:${seconds}`;
