@@ -34,12 +34,15 @@ btnCity.addEventListener("click", function () {
       if (data.cod != 200) {
         alert(data.message);
       } else {
-        timezoneOffsetInSeconds = +data.timezone;
+        timezoneOffsetInSeconds = data.timezone;
         function updateClock() {
           const currentDate = new Date();
-          const adjustedDate = new Date(
-            currentDate.getTime() + timezoneOffsetInSeconds * 1000
-          );
+          const localTime = currentDate.getTime();
+          const localOffset = currentDate.getTimezoneOffset() * 60000;
+          const utc = localTime + localOffset;
+          const cityTime = utc + (timezoneOffsetInSeconds * 1000);
+          const adjustedDate = new Date(cityTime);
+
           const year = adjustedDate.getFullYear();
           const month = adjustedDate.getMonth() + 1; // Місяці від 0 до 11, тому додати 1
           const day = adjustedDate.getDate(); // День місяця
