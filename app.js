@@ -12,14 +12,16 @@ const dayName = document.querySelector(".weather-widget__day");
 const todayDate = document.querySelector(".weather-widget__date");
 const windDegDirrect = document.querySelector(".icon-wind");
 const currentTimeCity = document.querySelector(".weather-widget__time");
-let date = new Date();
 let icon;
 let iconUrl;
 let cityValue;
 let timezoneOffsetInSeconds;
+let intervalId;
+
 btnCity.addEventListener("click", function () {
   currentTimeCity.textContent = "";
   iconWeatherWrapper.innerHTML = "";
+  clearInterval(intervalId); // Очистити попередній інтервал
   let weatherIcon;
   cityValue = inputCity.value.toUpperCase();
   cityName.textContent = cityValue;
@@ -39,52 +41,29 @@ btnCity.addEventListener("click", function () {
             currentDate.getTime() + timezoneOffsetInSeconds * 1000
           );
           const year = adjustedDate.getFullYear();
-          const month = adjustedDate.getMonth();
-          const day = adjustedDate.getDay();
-          const hours = adjustedDate.getHours();
-          const minutes = adjustedDate.getMinutes();
-          const seconds = adjustedDate.getSeconds();
+          const month = adjustedDate.getMonth() + 1; // Місяці від 0 до 11, тому додати 1
+          const day = adjustedDate.getDate(); // День місяця
+          const dayOfWeek = adjustedDate.getDay();
+          const hours = adjustedDate.getHours().toString().padStart(2, '0');
+          const minutes = adjustedDate.getMinutes().toString().padStart(2, '0');
+          const seconds = adjustedDate.getSeconds().toString().padStart(2, '0');
           const currentTime = `${hours}:${minutes}:${seconds}`;
           currentTimeCity.textContent = currentTime;
-          switch (day) {
-            case 0:
-              dayName.textContent = "Sunday";
-              break;
-            case 1:
-              dayName.textContent = "Monday";
-              break;
-            case 2:
-              dayName.textContent = "Tuesday";
-              break;
-            case 3:
-              dayName.textContent = "Wednesday";
-              break;
-            case 4:
-              dayName.textContent = "Thursday";
-              break;
-            case 5:
-              dayName.textContent = "Friday";
-              break;
-            case 6:
-              dayName.textContent = "Saturday";
-              break;
-          }
+
+          const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+          dayName.textContent = daysOfWeek[dayOfWeek];
           todayDate.textContent = `${day}/${month}/${year}`;
         }
+        updateClock();
         intervalId = setInterval(updateClock, 1000);
-        if (timezoneOffsetInSeconds != +data.timezone) {
-          clearInterval(intervalId);
-          currentTimeCity.textContent = "";
-        } else {
-          intervalId = setInterval(updateClock, 1000);
-        }
-        windSpeed.textContent = +data.wind.speed.toFixed(2);
+
+        windSpeed.textContent = data.wind.speed.toFixed(2);
         humidityPer.textContent = data.main.humidity + " %";
         weatherDesc.textContent = data.weather[0].description;
         preasureValue.textContent = data.main.pressure;
         windDeg.textContent = data.wind.deg;
         windDegDirrect.style.transform = `rotate(${data.wind.deg}deg)`;
-        tempValue.textContent = Math.floor(+data.main.temp);
+        tempValue.textContent = Math.floor(data.main.temp);
         icon = data.weather[0].icon;
         iconUrl = `http://openweathermap.org/img/w/${icon}.png`;
         weatherIcon = document.createElement("img");
