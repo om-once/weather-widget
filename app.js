@@ -39,9 +39,9 @@ btnCity.addEventListener("click", function () {
             currentDate.getTime() + timezoneOffsetInSeconds * 1000
           );
           const year = adjustedDate.getFullYear();
-          const month = adjustedDate.getMonth() + 1;
-          const day = adjustedDate.getDay() + 1;
-          const hours = adjustedDate.getHours() - 3;
+          const month = adjustedDate.getMonth();
+          const day = adjustedDate.getDay();
+          const hours = adjustedDate.getHours();
           const minutes = adjustedDate.getMinutes();
           const seconds = adjustedDate.getSeconds();
           const currentTime = `${hours}:${minutes}:${seconds}`;
